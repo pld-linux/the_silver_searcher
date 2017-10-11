@@ -1,11 +1,11 @@
 Summary:	A code-searching tool similar to ack, but faster
 Name:		the_silver_searcher
-Version:	2.0.0
+Version:	2.1.0
 Release:	1
 License:	Appache v2.0
 Group:		Applications
 Source0:	https://geoff.greer.fm/ag/releases/%{name}-%{version}.tar.gz
-# Source0-md5:	a0cdaced3aa12a7797271ab215ac4981
+# Source0-md5:	3e7207b060424174323236932bf76ec2
 URL:		https://geoff.greer.fm/ag/
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake
