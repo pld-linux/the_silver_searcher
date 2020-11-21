@@ -7,6 +7,7 @@ Group:		Applications
 Source0:	https://geoff.greer.fm/ag/releases/%{name}-%{version}.tar.gz
 # Source0-md5:	958a614cbebf47b2f27a7d00a5bb1bcb
 URL:		https://geoff.greer.fm/ag/
+Patch0:		gcc10.patch
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake
 BuildRequires:	pcre-devel
@@ -64,6 +65,7 @@ This package provides zsh-completion for the_silver_searcher.
 
 %prep
 %setup -q
+%patch0 -p1
 
 %build
 %{__aclocal} -I m4
