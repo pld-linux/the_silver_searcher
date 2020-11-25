@@ -1,0 +1,37 @@
+From b1e0ba5b8325860ac5fc6866f1982d62bedb9437 Mon Sep 17 00:00:00 2001
+From: Jan Palus <atler@pld-linux.org>
+Date: Tue, 24 Nov 2020 12:36:18 +0100
+Subject: [PATCH] Fix highlighting of multiple matches in same line with
+ --nomultiline
+
+offset_vector values are absolute within line so no need to recalculate
+them relative to previous match, just add buf_offset (beginning of line)
+
+Fixes #1080
+---
+ src/search.c | 5 ++---
+ 1 file changed, 2 insertions(+), 3 deletions(-)
+
+diff --git a/src/search.c b/src/search.c
+index 0dad3c07..ad48b9bb 100644
+--- a/src/search.c
++++ b/src/search.c
+@@ -147,7 +147,6 @@ ssize_t search_buf(const char *buf, const size_t buf_len,
+                     if (rv < 0) {
+                         break;
+                     }
+-                    size_t line_to_buf = buf_offset + line_offset;
+                     log_debug("Regex match found. File %s, offset %i bytes.", dir_full_path, offset_vector[0]);
+                     line_offset = offset_vector[1];
+                     if (offset_vector[0] == offset_vector[1]) {
+@@ -157,8 +156,8 @@ ssize_t search_buf(const char *buf, const size_t buf_len,
+ 
+                     realloc_matches(&matches, &matches_size, matches_len + matches_spare);
+ 
+-                    matches[matches_len].start = offset_vector[0] + line_to_buf;
+-                    matches[matches_len].end = offset_vector[1] + line_to_buf;
++                    matches[matches_len].start = offset_vector[0] + buf_offset;
++                    matches[matches_len].end = offset_vector[1] + buf_offset;
+                     matches_len++;
+ 
+                     if (opts.max_matches_per_file > 0 && matches_len >= opts.max_matches_per_file) {
