@@ -46,9 +46,7 @@ How is it so fast?
 Summary:	bash-completion for the_silver_searcher
 Group:		Applications/Shells
 Requires:	bash-completion
-%if "%{_rpmversion}" >= "5"
 BuildArch:	noarch
-%endif
 
 %description -n bash-completion-%{name}
 This package provides bash-completion for the_silver_searcher.
@@ -57,9 +55,7 @@ This package provides bash-completion for the_silver_searcher.
 Summary:	zsh-completion for the_silver_searcher
 Group:		Applications/Shells
 Requires:	zsh
-%if "%{_rpmversion}" >= "5"
 BuildArch:	noarch
-%endif
 
 %description -n zsh-completion-%{name}
 This package provides zsh-completion for the_silver_searcher.
